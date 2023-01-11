@@ -20,8 +20,8 @@ const defaultData = [
 ]
 
 exports.seed = function(knex) {
-  return knex('categories').del()
+  return knex('users').del()
     .then(function () {
-      return knex('categories').insert(defaultData);
+      return knex('users').insert(defaultData);
     });
 };

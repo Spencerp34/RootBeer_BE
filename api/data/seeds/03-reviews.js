@@ -1,13 +1,30 @@
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
- */
-exports.seed = async function(knex) {
-  // Deletes ALL existing entries
-  await knex('table_name').del()
-  await knex('table_name').insert([
-    {id: 1, colName: 'rowValue1'},
-    {id: 2, colName: 'rowValue2'},
-    {id: 3, colName: 'rowValue3'}
-  ]);
+const defaultData = [
+  {
+    brand_name: "A&W",
+    author_review: 5,
+    consumer_review: 3.5,
+    img_url: "https://this",
+    shop_url: "amazon.com"
+  },
+  {
+    brand_name: "Barqs",
+    author_review: 2,
+    consumer_review: 4.5,
+    img_url: "https://this",
+    shop_url: "amazon.com"
+  },
+  {
+    brand_name: "Mugg",
+    author_review: 3.5,
+    consumer_review: 3,
+    img_url: "https://this",
+    shop_url: "amazon.com"
+  },
+]
+
+exports.seed = function(knex) {
+  return knex('reviews').del()
+    .then(function () {
+      return knex('reviews').insert(defaultData);
+    });
 };
