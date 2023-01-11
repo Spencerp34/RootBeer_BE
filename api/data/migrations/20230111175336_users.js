@@ -5,8 +5,7 @@ exports.up = function(knex) {
         table.string('last_name');
         table.string('email').notNullable().unique();
         table
-            .integer("role")
-            .unsigned()
+            .string("role")
             .notNullable()
             .default("user")
             .onUpdate("RESTRICT")
