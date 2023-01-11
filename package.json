@@ -4,8 +4,8 @@
   "description": "Backend for Rootbeer Ratings",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "start": "node index.js",
+    "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run"
