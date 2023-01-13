@@ -8,8 +8,6 @@ exports.up = function(knex) {
             .string("role")
             .notNullable()
             .default("user")
-            .onUpdate("RESTRICT")
-            .onDelete("RESTRICT")
     });
 };
 
