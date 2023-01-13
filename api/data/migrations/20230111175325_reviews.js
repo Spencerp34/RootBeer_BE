@@ -6,6 +6,7 @@ exports.up = function(knex) {
         table.float("consumer_review").unsigned();
         table.string("img_url");
         table.string("shop_url");
+        table.string("review_description");
     });
 };
 
