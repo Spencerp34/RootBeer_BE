@@ -11,18 +11,18 @@ async function getOne(dish_id){
 };
 
 async function create(review){
-    return db('reviews').insert(review).returning("*");
+    return await db('reviews').insert(review).returning("*");
 };
 
 async function remove(id){
     return await db('reviews').where({ id }).del();
 };
 
-const update = (id, profile) => {
+const update = (id, review) => {
     return db('reviews')
       .where({ id: id })
       .first()
-      .update(profile)
+      .update(review)
       .returning('*')
 };
 
