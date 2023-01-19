@@ -15,7 +15,7 @@ async function create(review){
 };
 
 async function remove(id){
-    return await db('reviews').where({ id }).del();
+    return await db('reviews').where("review_id", id).del();
 };
 
 async function update(id, review){
