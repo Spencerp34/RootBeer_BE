@@ -1,12 +1,17 @@
 require("dotenv").config();
-const express = require('express')
 
+const helmet = require('helmet')
+const cors = require('cors')
+const express = require('express')
 const server = express();
 const port = process.env.PORT || 3000;
 
-server.use(express.json())
-
 const reviewsRouter = require('./api/reviews/reviews-router')
+
+server.use(cors())
+server.use(helmet())
+
+server.use(express.json())
 
 server.use("/reviews", reviewsRouter)
 
