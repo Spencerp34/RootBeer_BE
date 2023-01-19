@@ -5,8 +5,8 @@ async function getAll(){
     return allResults;
 };
 
-async function getOne(dish_id){
-    const result = await db('reviews').where('review_id', dish_id).select('*').first();
+async function getOne(review_id){
+    const result = await db('reviews').where('review_id', review_id).select('*').first();
     return result;
 };
 
@@ -18,9 +18,10 @@ async function remove(id){
     return await db('reviews').where({ id }).del();
 };
 
-const update = (id, review) => {
-    return db('reviews')
-      .where({ id: id })
+async function update(id, review){
+    console.log(id, review)
+    return  await db('reviews')
+      .where("review_id", id)
       .first()
       .update(review)
       .returning('*')

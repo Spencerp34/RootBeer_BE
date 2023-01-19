@@ -12,11 +12,6 @@ router.get('/:review_id', async (req, res) => {
     res.json(result);
 });
 
-router.put("/", async (req, res) => {
-    const review = req.body;
-    res.json(review);
-})
-
 router.post('/', async(req, res) => {
     const review = req.body;
     try{
@@ -26,5 +21,32 @@ router.post('/', async(req, res) => {
         res.status(500).json({message: e.message, note: "no return"})
     }
 });
+
+router.put("/", async (req, res) => {
+    const review = req.body;
+    const {review_id} = review;
+    if(review){
+        Review.getOne(review_id)
+            .then(
+                Review.update(review_id, review)
+                    .then((updated) => {
+                        res.status(200).json({message: "Review Updated", review: updated[0]})
+                    })
+                    .catch((err) => {
+                        res.status(500).json({
+                          message: `Could not update review '${review_id}'`,
+                          error: err.message,
+                        });
+                    })
+            )
+            .catch((err) => {
+                res.status(404).json({
+                  message: `Could not find profile '${review_id}'`,
+                  error: err.message,
+                });
+            });
+    }
+    res.status(401);
+})
 
 module.exports = router;
