@@ -10,7 +10,7 @@ const sharedConfig = {
 
 
 module.exports = {
-  production: {
+  development: {
     ...sharedConfig,
     connection: {
       database: process.env.DATABASE_URL,

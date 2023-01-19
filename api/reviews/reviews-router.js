@@ -12,6 +12,11 @@ router.get('/:review_id', async (req, res) => {
     res.json(result);
 });
 
+router.put("/", async (req, res) => {
+    const review = req.body;
+    res.json(review);
+})
+
 router.post('/', async(req, res) => {
     const review = req.body;
     try{
