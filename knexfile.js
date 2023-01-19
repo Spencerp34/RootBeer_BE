@@ -13,7 +13,7 @@ module.exports = {
   development: {
     ...sharedConfig,
     connection: {
-      database: process.env.DATABASE_URL,
+      database: process.env.PGDATABASE,
       user:     process.env.PGUSER,
       password: process.env.PGPASSWORD,
     },
