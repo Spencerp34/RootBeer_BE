@@ -49,4 +49,23 @@ router.put("/", async (req, res) => {
     res.status(401);
 })
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    try {
+      Review.getOne(id).then((review) => {
+        Review.remove(id).then(() => {
+          res
+            .status(200)
+            .json({ message: `review '${id}' was deleted.`, review: review });
+        });
+      });
+    } catch (err) {
+      res.status(500).json({
+        message: `Could not delete review with ID: ${id}`,
+        error: err.message,
+      });
+    }
+});
+
+
 module.exports = router;
