@@ -7,6 +7,7 @@ exports.up = function(knex) {
         table.string("img_url");
         table.string("shop_url");
         table.string("review_description");
+        table.timestamps(true, true);
     });
 };
 

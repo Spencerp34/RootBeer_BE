@@ -7,7 +7,8 @@ exports.up = function(knex) {
         table
             .string("role")
             .notNullable()
-            .default("user")
+            .default("user");
+        table.timestamps(true, true)
     });
 };
 
