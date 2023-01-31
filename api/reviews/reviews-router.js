@@ -1,7 +1,17 @@
 const router = require("express").Router();
 const Review = require('./reviews-model');
-const multer = require("multer")
-const upload = multer({dest: "uploads/"})
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, "./uploads/");
+  },
+  filename: function(req, file, cb){
+    cb(null, new Date().toISOString() + file.originalname)
+  }
+});
+
+const upload = multer({storage: storage});
 
 router.get('/', async (req, res) => {
     const result = await Review.getAll();
@@ -28,7 +38,6 @@ router.put("/", upload.single("review_img"), async (req, res) => {
     const review = req.body;
     const {review_id} = review;
 
-    console.log("review ID:", review_id)
     if(review){
         Review.getOne(review_id)
             .then(
