@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const Review = require('./reviews-model');
+const multer = require("multer")
+const upload = multer({dest: "uploads/"})
 
 router.get('/', async (req, res) => {
     const result = await Review.getAll();
@@ -12,8 +14,9 @@ router.get('/:review_id', async (req, res) => {
     res.json(result);
 });
 
-router.post('/', async(req, res) => {
+router.post('/', upload.single("review_img"), async(req, res) => {
     const review = req.body;
+    console.log("TESTING", review)
     try{
         await Review.create(review).then((review) => res.status(200).json({message: "Review Created", review: review}))
     } catch(e){

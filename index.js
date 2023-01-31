@@ -11,8 +11,6 @@ const reviewsRouter = require('./api/reviews/reviews-router')
 server.use(cors())
 server.use(helmet())
 
-server.use(express.json())
-
 server.use("/reviews", reviewsRouter)
 
 server.get("/", (req, res) => {
