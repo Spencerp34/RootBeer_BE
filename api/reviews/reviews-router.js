@@ -16,7 +16,6 @@ router.get('/:review_id', async (req, res) => {
 
 router.post('/', upload.single("review_img"), async(req, res) => {
     const review = req.body;
-    console.log("TESTING", review)
     try{
         await Review.create(review).then((review) => res.status(200).json({message: "Review Created", review: review}))
     } catch(e){
@@ -25,9 +24,11 @@ router.post('/', upload.single("review_img"), async(req, res) => {
     }
 });
 
-router.put("/", async (req, res) => {
+router.put("/", upload.single("review_img"), async (req, res) => {
     const review = req.body;
     const {review_id} = review;
+
+    console.log("review ID:", review_id)
     if(review){
         Review.getOne(review_id)
             .then(
