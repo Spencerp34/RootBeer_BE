@@ -16,6 +16,7 @@ module.exports = {
       database: process.env.PGDATABASE,
       user:     process.env.PGUSER,
       password: process.env.PGPASSWORD,
+      port: process.env.PGPORT,
     },
   },
 
