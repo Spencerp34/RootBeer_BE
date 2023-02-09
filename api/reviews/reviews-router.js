@@ -26,7 +26,7 @@ router.get('/:review_id', async (req, res) => {
 
 router.post('/', upload.single("review_img"), async(req, res) => {
     const review = req.body;
-    console.log("file", req.body)
+    await console.log("file", req.body)
     try{
         await Review.create(review).then((review) => res.status(200).json({message: "Review Created", review: review}))
     } catch(e){

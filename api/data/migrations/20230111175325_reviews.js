@@ -4,7 +4,7 @@ exports.up = function(knex) {
         table.string('brand_name', 50).notNullable();
         table.float("author_review").unsigned();
         table.float("consumer_review").unsigned();
-        table.string("img_url");
+        table.string("review_img");
         table.string("shop_url");
         table.string("review_description");
         table.timestamps(true, true);
