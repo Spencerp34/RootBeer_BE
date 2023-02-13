@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const express = require('express');
 const server = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || process.env.PGPORT;
 
 const reviewsRouter = require('./api/reviews/reviews-router');
 

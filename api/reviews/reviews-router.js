@@ -7,11 +7,34 @@ const storage = multer.diskStorage({
     cb(null, "./uploads/");
   },
   filename: function(req, file, cb){
-    cb(null, new Date().toISOString() + file.originalname + ".jpg")
+    let type = ".jpg"
+    if(file.mimetype === "image/jpeg"){
+      type = ".jpeg"
+    }else if(file.mimetype === "image/png"){
+      type = ".png"
+    }
+    cb(null, new Date().toISOString() + file.originalname + type)
   }
 });
 
-const upload = multer({storage: storage});
+const filter = (req, file, cb) => {
+  //accepts file
+  if(file.mimetype === "image/jpeg" || file.mimetype === "image/jpg" || file.mimetype === "image/png"){
+    cb(null, true)
+  }
+  //rejects file
+  else{
+    cb(null, false)
+  }
+}
+
+const upload = multer({
+  storage: storage, 
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  }, 
+  fileFilter: filter
+});
 
 router.get('/', async (req, res) => {
     const result = await Review.getAll();
