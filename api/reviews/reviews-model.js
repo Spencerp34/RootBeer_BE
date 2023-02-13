@@ -10,8 +10,13 @@ async function getOne(review_id){
     return result;
 };
 
-async function create(review){
-    return await db('reviews').insert(review).returning("*");
+async function create(review, req){
+    const newData = {
+        ...review,
+        review_image: req.file.path || null,
+    }
+
+    return await db('reviews').insert(newData).returning("*");
 };
 
 async function remove(id){
