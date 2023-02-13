@@ -10,6 +10,7 @@ const reviewsRouter = require('./api/reviews/reviews-router');
 
 server.use(cors());
 server.use(helmet());
+server.use(express.static("uploads"));
 
 server.use("/reviews", reviewsRouter);
 
