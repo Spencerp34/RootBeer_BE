@@ -13,7 +13,7 @@ async function getOne(review_id){
 async function create(review, req){
     const newData = {
         ...review,
-        review_image: req.file.path || null,
+        review_img: req.file.path || null,
     }
 
     return await db('reviews').insert(newData).returning("*");
