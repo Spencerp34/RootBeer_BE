@@ -11,9 +11,13 @@ async function getOne(review_id){
 };
 
 async function create(review, req){
-    const newData = {
-        ...review,
-        review_img: req.file.path || null,
+    let newData = review
+
+    if(req.file){
+        newData = {
+            ...review,
+            review_img: req.file.path,
+        }
     }
 
     return await db('reviews').insert(newData).returning("*");
@@ -24,7 +28,6 @@ async function remove(id){
 };
 
 async function update(id, review){
-    console.log(id, review)
     return  await db('reviews')
       .where("review_id", id)
       .first()
