@@ -12,14 +12,12 @@ async function getOne(review_id){
 
 async function create(review, req){
     let newData = review
-
     if(req.file){
         newData = {
             ...review,
             review_img: req.file.path,
         }
     }
-
     return await db('reviews').insert(newData).returning("*");
 };
 
