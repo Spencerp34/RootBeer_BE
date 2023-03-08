@@ -64,7 +64,7 @@ router.put("/", upload.single("review_img"), async (req, res) => {
     if(review){
         Review.getOne(review_id)
             .then(
-                Review.update(review_id, review)
+                Review.update(review_id, review, req)
                     .then((updated) => {
                         res.status(200).json({message: "Review Updated", review: updated[0]})
                     })

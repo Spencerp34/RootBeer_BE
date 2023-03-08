@@ -25,11 +25,18 @@ async function remove(id){
     return await db('reviews').where("review_id", id).del();
 };
 
-async function update(id, review){
+async function update(id, review, req){
+    let newData = review
+    if(req.file){
+        newData = {
+            ...review,
+            review_img: req.file.path,
+        }
+    }
     return  await db('reviews')
       .where("review_id", id)
       .first()
-      .update(review)
+      .update(newData)
       .returning('*')
 };
 
